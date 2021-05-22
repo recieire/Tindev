@@ -14,11 +14,8 @@ if (!targetDev) {
   return res.status(400).json({ error: 'Dev does not exist'});
 }
 
-if (targetDev.likes.includes(loggedDev._id)) {
-  console.log('DEU MATCH');
-}
 
-loggedDev.likes.push(targetDev._id);
+loggedDev.dislikes.push(targetDev._id);
 await loggedDev.save();
 
 return res.json(loggedDev);
