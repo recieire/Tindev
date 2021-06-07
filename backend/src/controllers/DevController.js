@@ -3,19 +3,23 @@ const Dev = require('../models/Dev');
 
 module.exports = {
   async index(req, res) {
-const { user } = req.headers;
+    const { user } = req.headers;
+    const loggedDev = await Dev.findById(user);
 
-const loggedDev = await Dev.findById(user);
+    const users = await Dev.find({
+      $and: [
+        { _id: { $ne: user } },
+        { _id: { $nin: loggedDev.likes } },
+        { _id: { $nin: loggedDev.dislikes } }
+      ]
+    });
 
-const users = await Dev.find({
-  $and: [
-    { _id: { $ne: user } },
-    { _id: { $nin: loggedDev.likes } },
-    { _id: { $nin: loggedDev.dislikes } }
-  ]
-});
-
-return res.json(users);
+    const devs = {
+      loggedDev,
+      users
+    }
+    
+    return res.json(devs);
   },
 
 
