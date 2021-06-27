@@ -1,3 +1,5 @@
+# Tindev
+
 A POC fullstack app that uses Github's API to fetch a user's profile by entering their real username and then allows for some basic social interactivity features to play with such as like, dislike and match other users. In order to be able to view and interact with other users, you need first to populate the app database by logging in with their Github usernames (no authentication required).
 
 ## How To Use
